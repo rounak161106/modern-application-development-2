@@ -20,7 +20,7 @@ In addition, variables declared with `let` or `const` can belong to an additiona
 
 - First of all, all functions and variables in the script are hoisted. If a variable is declared with `let` or `const`, it is hoisted to the top of the script with a **temporal dead zone** value. If a variable is declared with `var`, it is hoisted to the top of the script with an initial value of `undefined`. Functions, however, can be accessed before their definition, since the entire function definition is hoisted to the top of the script.
 - If we declare an unnamed function or an arrow function and assign it to a variable, trying to call it before the declaration won't work. During hoisting, the compiler only sees the LHS (the variable), not the RHS (the function), so it doesn't know a function exists there. The variable is hoisted, not the function — this results in `undefined` or a temporal dead zone error, depending on the keyword used.
-- We can also declare a variable without any keyword, but this should be avoided. For hoisting purposes, such variables follow `var` behavior.
+- We can also declare a variable without any keyword (an implicit global), but this should be avoided. Unlike `var`, these are **not hoisted at all** — the property is only created on the global object when that line actually executes. Referencing it earlier throws a `ReferenceError`, not `undefined`.
 
 ## Object Property Access
 
@@ -28,8 +28,9 @@ In addition, variables declared with `let` or `const` can belong to an additiona
 let obj = { name: "Rounak", "age": 18 };
 ```
 
-- `obj.name` is valid, but `obj.age` is not (since `"age"` was declared as a quoted string key in this style) — so we use `obj["age"]`. Note: in newer JS versions this restriction doesn't really apply, and it works either way.
-- Numbers cannot be used as property names directly, e.g. `{13: "Thirteen"}` — this is an error.
+- Quoting a key in an object literal (`"age": 18`) doesn't change anything — it becomes the exact same string key as an unquoted one. So both `obj.name` and `obj.age` are valid dot-notation access here; there's no restriction to work around.
+- Numeric property names are also allowed, e.g. `{13: "Thirteen"}` is valid (the number is coerced to the string key `"13"`).
+- Bracket notation (`obj["age"]`) is still needed when the key is dynamic (stored in a variable) or isn't a valid identifier (e.g. contains spaces or starts with a digit, like `"1st place"`).
 
 ## String Formatting
 
@@ -64,7 +65,8 @@ run_callback(greet);
 ## Array Methods
 
 - `map()`, `filter()`, `find()` syntax: `arr.map((x) => {})` — same pattern for all three.
-- `reduce()` syntax: `arr.reduce((init, x) => { init + x }, 2);`
+- `reduce()` syntax: `arr.reduce((init, x) => init + x, 2);`
+  - Careful with brace syntax: `(init, x) => { init + x }` does **not** work as expected — using `{}` as the arrow function body requires an explicit `return`, otherwise the callback returns `undefined` on every iteration. Either drop the braces (`=> init + x`) or write `=> { return init + x; }`.
 
 All four methods return a value and do **not** modify the original array.
 
@@ -117,29 +119,32 @@ func_new(); // output: "undefined age is undefined"
 
 ### Fixing Loss of Context: `call()`, `apply()`, `bind()`
 
-To restore context, we use three object methods: `call()`, `apply()`, and `bind()`.
+To restore context, we use three object methods: `call()`, `apply()`, and `bind()` — but they behave differently, and it's important not to treat them as interchangeable:
+
+- **`call()`** and **`apply()`** invoke the function **immediately** and return whatever the function returns (not a new function).
+- **`bind()`** does **not** invoke the function — it returns a new function with `this` permanently bound, which you then call separately (hence the extra `()` at the end).
 
 ```js
-let func_new = obj.func.apply(<context_obj>);
-let func_new = obj.func.call(<context_obj>);
-let func_new = obj.func.bind(<context_obj>)();
+let result1 = obj.func.apply(<context_obj>);   // calls obj.func right away, result1 = return value
+let result2 = obj.func.call(<context_obj>);    // calls obj.func right away, result2 = return value
+let func_new = obj.func.bind(<context_obj>);   // does NOT call obj.func — returns a bound function
+func_new();                                     // this actually calls it
 ```
 
-In all these cases, when using `this` or these three methods to access a property, we never get a `ReferenceError` — we always get `undefined`, since it's searching for a property within an object, not any general variable.
-
-**With arguments:**
+**With arguments** — `apply()` takes arguments as an array, while `call()` and `bind()` take them individually:
 
 ```js
-let func_new = obj.func.apply(<context_obj>, ["argument1", "argument2", ...]);
-let func_new = obj.func.call(<context_obj>, "argument1", "argument2", ...);
-let func_new = obj.func.bind(<context_obj>)("argument1", "argument2", ...);
+obj.func.apply(<context_obj>, ["argument1", "argument2"]);       // runs immediately
+obj.func.call(<context_obj>, "argument1", "argument2");          // runs immediately
+let func_new = obj.func.bind(<context_obj>, "argument1", "argument2");
+func_new(); // runs now
 ```
 
 ### Arrow Functions and `this`
 
 For arrow functions, the behavior is completely different. If we access `this.something` inside an arrow function, it does **not** refer to the current object. Instead, it accesses the **global `this`** and searches for the variable there — this may return `undefined` even if the property exists in the current object.
 
-However, if a variable is defined with `var`, it becomes part of the local/global `this`, so accessing it via `this` will return its value. This does not happen with `let` or `const`, since those are not attached to the global `this` — they remain script-level properties instead.
+However, at the top level of a classic (non-module, non-strict-mode) script, a variable declared with `var` becomes a property of the global object (e.g. `window` in browsers), so it can be accessed via `this.varName` there. This does **not** hold in general — it doesn't apply inside functions, in ES modules, or in strict mode. `let` and `const` never attach to the global object regardless of scope, so `this.varName` won't find them even at the top level.
 
 ## Collections (Lists and Dictionaries)
 
