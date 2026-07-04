@@ -198,3 +198,419 @@ const obj2 = {
 //   prop3: val3
 // }
 ```
+
+## Asynchrony
+![Asynchrony](image.png)
+
+For synchronous codes, they go to the call stack and execute in order. If during execution, an asynchronous function is called, it is sent to the web APIs and the rest of the synchronous code continues to execute. Once the asynchronous function is completed, it is sent to the callback queue. The event loop checks if the call stack is empty and if so, it pushes the returned value of the asynchronous function from the callback queue to the call stack for execution. The task queue codes will get chance to execute only after the call stack is empty. The event loop keeps checking if the call stack is empty and pushes the callback queue codes to the call stack for execution.
+
+# Synchronous vs Asynchronous Behavior in JS
+
+## Synchronous Behavior
+
+Code runs top to bottom, one line at a time — each function call blocks until it finishes before the next line runs.
+
+```js
+function first() {
+  console.log("First function start");
+  second();
+  console.log("First function end");
+}
+
+function second() {
+  console.log("Second function");
+}
+
+console.log("Program start");
+first();
+console.log("Program end");
+```
+
+**Output order:**
+```
+Program start
+First function start
+Second function
+First function end
+Program end
+```
+
+`first()` doesn't return control back to the main program until it's fully done — including the call to `second()` inside it.
+
+## Asynchronous Behavior
+
+```js
+console.log("Start");
+
+setTimeout(function timeoutCallback() {
+  console.log("Timeout executed");
+}, 2000);
+
+console.log("End");
+```
+
+**Output order:**
+```
+Start
+End
+Timeout executed
+```
+
+`setTimeout` doesn't block execution. It hands the callback off to be run later (after the delay), and the rest of the synchronous code (`console.log("End")`) keeps running immediately. The callback only executes once the call stack is clear and the timer has expired — this is the event loop at work.
+
+### Different Ways to Write the Callback
+
+All of these are equivalent ways to pass a callback into `setTimeout`:
+
+```js
+// Named function declaration, defined separately
+function timeoutCallback() {
+  console.log("Timeout executed");
+}
+setTimeout(timeoutCallback, 2000);
+
+// Function expression assigned to a const
+const timeoutCallback = function () {
+  console.log("Timeout executed");
+};
+setTimeout(timeoutCallback, 2000);
+
+// Arrow function assigned to a const
+const timeoutCallback = () => {
+  console.log("Timeout executed");
+};
+setTimeout(timeoutCallback, 2000);
+
+// Inline anonymous arrow function (most common in practice)
+setTimeout(() => {
+  console.log("Timeout executed");
+}, 2000);
+```
+
+> Conceptually, `setTimeout(func, delay)` behaves like: wait for `delay` milliseconds, then run `func()` — but it does this asynchronously via the event loop instead of blocking the rest of the program.
+
+## Functions That Use `setTimeout` Internally
+
+```js
+function greet() {
+  console.log("Hello");
+}
+
+function delayedGreet() {
+  setTimeout(function () {
+    console.log("Delayed Hello");
+  }, 1000);
+}
+
+console.log("Start");
+greet();
+delayedGreet();
+console.log("End");
+```
+
+**Output order:**
+```
+Start
+Hello
+End
+Delayed Hello
+```
+
+Even though `delayedGreet()` is called before `console.log("End")` finishes executing, its internal `setTimeout` callback is deferred — so `"End"` logs before `"Delayed Hello"`.
+
+## More on the Runtime (Event Loop Behavior)
+
+```js
+function first() {
+  console.log("First start");
+
+  setTimeout(function () {
+    console.log("First timeout");
+  }, 0);
+
+  console.log("First end");
+}
+
+function second() {
+  console.log("Second function");
+}
+
+console.log("Program start");
+first();
+second();
+console.log("Program end");
+```
+
+**Output order:**
+```
+Program start
+First start
+First end
+Second function
+Program end
+First timeout
+```
+
+Even with a delay of `0` ms, the `setTimeout` callback is **not** run immediately. It's pushed to the callback queue and only runs after:
+1. All synchronous code in the current call stack finishes (`first()`, `second()`, and the remaining top-level `console.log`s).
+2. The call stack is completely empty.
+
+This demonstrates that `setTimeout(fn, 0)` doesn't mean "run now" — it means "run as soon as possible, after the current synchronous execution completes."
+
+
+## Objects Oriented Programming (OOP)
+
+
+## Introduction
+
+Object-Oriented Programming (OOP) is a programming paradigm where code
+is organized using objects.\
+Objects contain:
+
+-   Properties → Data
+-   Methods → Behavior
+
+Example:
+
+``` js
+let student = {
+    name: "Adarsh",
+    age: 21,
+    greet() {
+        console.log("Hello, my name is " + this.name);
+    }
+};
+
+student.greet();
+```
+
+------------------------------------------------------------------------
+
+# 1. Classes and Objects
+
+## Class
+
+A class is a blueprint used to create objects.
+
+``` js
+class Student {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    greet() {
+        console.log("Hello, my name is " + this.name);
+    }
+}
+```
+
+## Object
+
+An object is an instance of a class.
+
+``` js
+let s1 = new Student("Adarsh", 21);
+s1.greet();
+```
+
+------------------------------------------------------------------------
+
+# 2. Constructor
+
+Constructor is a special method used to initialize object properties.
+
+``` js
+class Car {
+    constructor(brand, year) {
+        this.brand = brand;
+        this.year = year;
+    }
+}
+
+let car1 = new Car("Toyota", 2022);
+console.log(car1.brand);
+```
+
+------------------------------------------------------------------------
+
+# 3. Class Methods
+
+Methods are functions defined inside the class.
+
+``` js
+class Calculator {
+
+    add(a, b) {
+        return a + b;
+    }
+
+    multiply(a, b) {
+        return a * b;
+    }
+}
+
+let calc = new Calculator();
+console.log(calc.add(2,3));
+```
+
+------------------------------------------------------------------------
+
+# 4. Getter and Setter
+
+Used to control access to properties.
+
+``` js
+class Student {
+
+    constructor(name) {
+        this._name = name;
+    }
+
+    get name() {
+        return this._name;
+    }
+
+    set name(value) {
+        this._name = value;
+    }
+}
+
+let s = new Student("Adarsh");
+console.log(s.name);
+
+s.name = "Rahul";
+console.log(s.name);
+```
+
+------------------------------------------------------------------------
+
+# 5. Static Methods
+
+Static methods belong to the class, not the object.
+
+``` js
+class MathUtils {
+
+    static add(a, b) {
+        return a + b;
+    }
+}
+
+console.log(MathUtils.add(5,3));
+```
+
+------------------------------------------------------------------------
+
+# 6. Inheritance
+
+Inheritance allows one class to use another class properties and
+methods.
+
+``` js
+class Animal {
+
+    constructor(name) {
+        this.name = name;
+    }
+
+    speak() {
+        console.log(this.name + " makes sound");
+    }
+}
+
+class Dog extends Animal {
+
+}
+
+let d = new Dog("Tommy");
+d.speak();
+```
+
+------------------------------------------------------------------------
+
+# 7. Super Keyword
+
+Used to call parent constructor.
+
+``` js
+class Animal {
+
+    constructor(name) {
+        this.name = name;
+    }
+}
+
+class Dog extends Animal {
+
+    constructor(name, breed) {
+        super(name);
+        this.breed = breed;
+    }
+}
+
+let d = new Dog("Tommy", "Labrador");
+console.log(d.name);
+```
+
+------------------------------------------------------------------------
+
+# 8. Complete Example
+
+``` js
+class Person {
+
+    constructor(name) {
+        this._name = name;
+    }
+
+    get name() {
+        return this._name;
+    }
+
+    set name(value) {
+        this._name = value;
+    }
+
+    greet() {
+        console.log("Hello " + this._name);
+    }
+
+    static info() {
+        console.log("Person class");
+    }
+}
+
+class Student extends Person {
+
+    constructor(name, marks) {
+        super(name);
+        this.marks = marks;
+    }
+
+    greet() {
+        super.greet();
+        console.log("Marks: " + this.marks);
+    }
+}
+
+let s1 = new Student("Adarsh", 95);
+s1.greet();
+Person.info();
+```
+
+------------------------------------------------------------------------
+
+# Summary
+
+  Concept       Description
+  ------------- -----------------------
+  Class         Blueprint
+  Object        Instance
+  Constructor   Initializes object
+  Method        Function inside class
+  Getter        Get value
+  Setter        Set value
+  Static        Belongs to class
+  Inheritance   Extending class
+  Super         Access parent
