@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <title>Task Manager</title>
+    <style>
+        .dangerClass{
+            color: red;
+        }
+
+        .green{
+            color: green
+        }
+    </style>
+</head>
+<body> 
+    <div id="app">
+        <h2>Task Manager</h2>
+        <label for="mytask">Enter your task:</label>
+        <input id="mytask" type="text" v-model="task">
+        <button v-on:click="addTask">ADD+</button> <br>
+        <span :class="{dangerClass: danger, green: green}">{{ info }}</span>
+        <h3>Current Task: {{ task }}</h3>
+        <h3>My Daily Tasks</h3>
+        <h4 v-if="mytasks.length === 0">No new Task</h4>
+        <!-- <ul v-else>
+            <li v-for="task in mytasks">{{ task }}</li>
+        </ul> -->
+        <table v-else>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Task Name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="task in mytasks">
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.name }}</td>
+                    <td v-if="!task.isCompleted">Pending</td>
+                    <td v-else>Completed</td>
+                    <td v-if="!task.isCompleted">
+                        <button @click="markComplete(task.id)">Mark as complete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Total Tasks: {{ mytasks.length }}</h3>
+        <h3>Completed Tasks: {{ completedTasks }}</h3>
+        <h3>Pending Tasks: {{ pendingTasks }}</h3>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue JS - Sess 1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+</head>
+<body>
+    <!-- First Vue App -->
+    <!-- id selector # -->
+    <!-- <div id = "app" :height="height">{{ message }}</div> -->
+
+    <!-- <div height="140" >Hello India</div> -->
+
+    
+    <!-- cannot use vue app here -->
+    
+    <!-- Vue Directive - v-bind -->
+    <!-- <div id="app-2">
+        <div id="abc" class="pqr" :style="val">{{message}}</div>
+        <span :title="message">
+            Hover your mouse over me for a few seconds
+            to see my dynamically bound title!
+        </span>
+    </div> -->
+
+    <!-- Conditions in template -->
+    <!-- <div id="app-3">
+        <span v-if="seen">Now you see me</span>
+    </div> -->
+
+    <!-- loops in template -->
+    <!-- <div id="app-4">
+        <ol>
+            <li v-for="todo in todos">{{ todo.text }}</li>
+        </ol>
+        <span>{{ todos.length }}</span>
+    </div> -->
+
+    <!-- user input -->
+    <!-- <div id="app-5">
+        <span>{{ message }}</span>
+        <input type="date" v-model="message">
+        <input type="date" v-model="message">
+
+    <input type="text" name="username" value="MAD2"> Not to be used in vue
+    </div> -->
+
+    <!-- user event -->
+    <!-- <div id="app-6">
+        <input v-model="message">
+        <button @click="reverseMessage">Reverse Message</button> 
+        <p>{{ message }}</p>    
+        <p>{{ info.course }}</p>    
+    </div> -->
+
+    <!-- derived values -->
+    <!-- <div id="app-7">
+        {{ fullname }} <br>
+        {{ reversed }} 
+    </div> -->
+
+    <div id="app-8">
+        <input v-model="message"> <br>
+        {{ message }} <br>
+        {{ info }} <br>
+        {{ oldVal }}
+    </div>
+    <script src="./vuejs-part1.js"></script>
+</body>
+</html>

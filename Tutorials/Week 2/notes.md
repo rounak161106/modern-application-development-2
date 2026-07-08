@@ -357,6 +357,25 @@ Even with a delay of `0` ms, the `setTimeout` callback is **not** run immediatel
 
 This demonstrates that `setTimeout(fn, 0)` doesn't mean "run now" — it means "run as soon as possible, after the current synchronous execution completes."
 
+## Prototypes
+```js
+const x = {
+  a: 1,
+  inc : function() {
+    this.a++;
+  }
+}
+```
+We have created an object `x` with a property `a` and a method `inc` that increments `a`. Now, we can create another object `y` that inherits from `x` using the prototype chain.
+
+```js
+const y = {
+  __proto__: x,
+  b: 2
+};
+```
+----------------------------------------------------------------------------
+> d.length is not defined if d is a object. It is only defined for arrays. If you want to get the number of properties in an object, you can use `Object.keys(d).length`.
 
 ## Objects Oriented Programming (OOP)
 
