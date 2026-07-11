@@ -4,8 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 <body>
-    
+    <div id="app">
+        <h2>Task Manager</h2>
+        <label for="my-task">Enter your task: </label>
+        <input type="text" id="my-task" v-model="task">
+        <button @click="add_task">Add</button>
+        <h3>My daily tasks</h3>
+        <p v-if="mytasks.length === 0">No tasks</p>
+        <table v-else border="3" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="task in mytasks">
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.name }}</td>
+                    <td v-if="task.isCompleted">Completed</td>
+                    <td v-else>Pending</td>
+                    <td v-if="!task.isCompleted"><button @click="mark_complete(task.id)">Mark as Complete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Completed Tasks : {{ completedTasks }}</h3>
+        <h3>Pending Tasks : {{ pendingTasks }}</h3>
+    </div>
+    <script src="/Tutorials/Week 3/Task Management Application/main.js"></script>
 </body>
 </html>
