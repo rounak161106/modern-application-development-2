@@ -2,7 +2,10 @@ const app = new Vue({
     el : "#app", 
     data : {
         mytasks : [],
-        task : ""
+        task : "",
+        info : "Enter a task with length more than 7 characters",
+        danger : true,
+        okay : false
     },
     methods : {
         add_task : function(){
@@ -26,6 +29,20 @@ const app = new Vue({
         pendingTasks : function(){
             // let tasks = this.mytasks.filter((task) => task.isCompleted == true)
             return this.mytasks.length - this.completedTasks 
+        }
+    }, 
+    watch : {
+        task : function(newvalue, oldvalue){
+            if(newvalue.length < 8){
+                this.info = "Length is still less than 7"
+                this.danger = true
+                this.okay = false
+            }
+            else{
+                this.info = "Good to go, click on add!!"
+                this.danger = false
+                this.okay = true
+            }
         }
     }
 })
