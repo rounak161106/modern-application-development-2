@@ -2,8 +2,8 @@
 
 ## Variable Declarations
 
-In `var` and `let` declarations, the initializer is optional. If a variable is declared without an initializer, it is assigned the value `undefined`.
-
+1. In `var` and `let` declarations, the initializer is optional. If a variable is declared without an initializer, it is assigned the value `undefined`.
+2. variables declared using var can be redeclared in the same scope without any error, this is not the case with let and const.
 ## Variable Scope
 
 A variable may belong to one of the following scopes:

@@ -16,15 +16,15 @@
 
 // console.log("End");
 
-function fetchData(argument){
-    setTimeout(function(){ // Intentional delay
-        argument("Data loaded");
-    }, 2000); // expecting data ---> perform operations
-}
+// function fetchData(argument){
+//     setTimeout(function(){ // Intentional delay
+//         argument("Data loaded");
+//     }, 2000); // expecting data ---> perform operations
+// }
 
-const mylog = function(result){
-    console.log(result);
-}
+// const mylog = function(result){
+//     console.log(result);
+// }
 
 // mylog("dummy");
 
@@ -107,46 +107,46 @@ const mylog = function(result){
 
 // Promise - more practical example 
 
-function fetchUser(){
-    return new Promise(function(resolve, reject){
-        setTimeout(function(){
-            let success = true;
-            if(success){
-                resolve({name:"Adarsh", id:101});
-            } else {
-                reject("Task failed");
-            }
-        },2000);
-    });
-}
+// function fetchUser(){
+//     return new Promise(function(resolve, reject){
+//         setTimeout(function(){
+//             let success = false;
+//             if(success){
+//                 resolve({name:"Adarsh", id:101});
+//             } else {
+//                 reject("Task failed");
+//             }
+//         },2000);
+//     });
+// }
 
 // console.log("Start");
 
 // console.log(fetchUser())
 
 // fetchUser()
-// .then(function(user){
-//     console.log("User:", user);
-// })
-// .catch((error) => console.log(error));
-
-// console.log("End");
+//     .then(function(user){
+//         console.log("User:", user);
+//     })
+//     .catch((error) => console.log(error));
+    
+//     console.log("End");
 
 // fetch(http://localhost:5000/users) (delay)---> [<user1>, <user2>]
 
 // Promise chaining 
 
-function step1(){
-    return new Promise(resolve => {
-        setTimeout(()=> resolve("Step 1 done"),1000);
-    });
-}
+// function step1(){
+//     return new Promise(resolve => {
+//         setTimeout(()=> resolve("Step 1 done"),1000);
+//     });
+// }
 
-function step2(){
-    return new Promise(resolve => {
-        setTimeout(()=> resolve("Step 2 done"),1000);
-    });
-}
+// function step2(){
+//     return new Promise(resolve => {
+//         setTimeout(()=> resolve("Step 2 done"),1000);
+//     });
+// }
 
 // step1()
 // .then(function(result){
@@ -251,22 +251,22 @@ function step2(){
 // Async await - Async/await allows writing asynchronous code 
 // that looks like synchronous code.
 
-function step1(){
-    return new Promise(resolve => {
-        setTimeout(()=> resolve("Step 1 done"),1000);
-    });
-}
+// function step1(){
+//     return new Promise(resolve => {
+//         setTimeout(()=> resolve("Step 1 done"),1000);
+//     });
+// }
 
-function step2(resp){
-    return new Promise(resolve => {
-        setTimeout(()=> resolve( resp + " Step 2 done"),1000);
-    });
-}
+// function step2(resp){
+//     return new Promise(resolve => {
+//         setTimeout(()=> resolve( resp + " Step 2 done"),1000);
+//     });
+// }
 
-async function runTask(){
-    let result = await step1(); // returns promise
-    console.log(result);
-}
+// async function runTask(){
+//     let result = await step1(); // returns promise
+//     console.log(result);
+// }
 
 // const resp1 = await step1() //----> promise
 
@@ -276,16 +276,16 @@ async function runTask(){
 // await → wait for promise to finish
 
 // Async/Await Version of Chaining
-async function runProcess(){
-    let r1 = await step1();
-    // console.log(r1);
+// async function runProcess(){
+//     let r1 = await step1();
+//     // console.log(r1);
 
-    let r2 = await step2(r1);
-    console.log(r2);
-}
+//     let r2 = await step2(r1);
+//     console.log(r2);
+// }
 
 
-runProcess();
+// runProcess();
 
 // Error Handling with Async/Await
 
