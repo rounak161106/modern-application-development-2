@@ -1,0 +1,15 @@
+Week 2 Topics
+
+- Hoisting
+- more on var - Global object
+- more on functions - brief of call backs and IIFE with example
+- Arrays - array methods - map, filter, find, reduce, sort
+- Objects - context, this, function methods (closure brief) - call, apply, bind, this in arrow function
+- Iteration - On arrays, on objects, object.methods, Object.keys, Object.entries
+- Destructuring 
+- classes and prototypes 
+- JS Asynchrony
+- JS Event loop 
+- callback revise
+- setInterval, setTimeout
+- OOPs
