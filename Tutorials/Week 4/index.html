@@ -5,11 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue Component </title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        .blog-style{
+            display: inline-block;
+            width: fit-content;
+            background-color: pink;
+            color: black;
+            border: 2px solid black;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
         <h2>{{message}}</h2>
-        <blog></blog>
+        <blog attr1="val1" attr2="val2" class="blog-style" @clicked="inccount">Content within the defined component</blog>
+        <blog attr1="val1" attr2="val2" class="blog-style" @clicked="inccount">Content within the defined component</blog>
+        <blog attr1="val1" attr2="val2" class="blog-style" :msg="compMessage" @clicked="inccount">Content within the defined component</blog>
+        <h1>Total Clicks : {{ totcount }}</h1>
     </div>
     <script src="main.js"></script>
 </body>
