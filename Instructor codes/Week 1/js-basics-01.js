@@ -24,7 +24,7 @@
 
 // console.log("hello"); console.log("world");
 
-// console.log("1" * "2");
+// console.log("2" * "2");
 // console.log("1 + 2 + 6");
 
 // Declaring a variable
@@ -130,15 +130,16 @@
 // var variable1 = 20;
 // {
 //     console.log(variable1);
-//     var variable2 = 30;
+//     let variable2 = 30;
 // }
 // console.log(variable2);
 
 // var var3 = 20;
 // function test() {
 //     var var4 = 30;
-    // console.log(var3);
+//     console.log(var3);
 // }
+// test()
 // console.log(var4)
 
 // console.log(variable3);
@@ -168,11 +169,13 @@
 // let gender = "Male";
 
 // if (gender == "Male") {
-//     let color = "green"
+//     color = "green"
+//     console.log(color)
 //     color = "White";
 // } else {
 //     color = "black";
 // }
+// console.log(color)
 
 // Comparisons
 
@@ -217,28 +220,28 @@
 
 // Functions 
 // conventional functions - named functions
-function add(a, b) {
-    var val1 = 10;
-    return a + b;
-}
+// function add(a, b) {
+//     var val1 = 10;
+//     return a + b;
+// }
 
-console.log(val1); // NA
-console.log(add(4,6));
+// console.log(val1); // NA
+// console.log(add(4,6));
 
 // function expressions - unnamed functions 
-const mySum = function(a, b) { // 
-    return a + b;
-}
+// const mySum = function(a, b) { // 
+//     return a + b;
+// }
 
-let sum = mySum(4,6);
+// let sum = mySum(4,6);    
 
 // arrow function 
-const product = (a, b) => a*b; // callbacks
-const square = (a, b) => {
-    let Asqr = a**2;
-    let Bsqr = b**2;
-    return Asqr + Bsqr;
-}
+// const product = (a, b) => a*b; // callbacks
+// const square = (a, b) => {
+//     let Asqr = a**2;
+//     let Bsqr = b**2;
+//     return Asqr + Bsqr;
+// }
 // // const product = (a, b) => {return a*b}; // callbacks
 
 // console.log(sum(4, 7));
