@@ -8,7 +8,23 @@
 <body>
     <h1>Hello World!</h1>
     <script>
-        
+        function fetchdata(){
+            fetch('http://127.0.0.1:5000/')
+            .then((r) => {
+                // console.log(r)
+                // console.log(r.status); 
+                // console.log(r.json)
+                return r.json()
+            } )
+            .then((data) => console.log(data))
+        }
+        async function fetchdata2(){
+            let resp = await fetch("http://127.0.0.1:5000/")
+            let res = await resp.json()
+            console.log(res)
+        }
+        fetchdata() 
+        fetchdata2()
     </script>
 </body>
 </html>
