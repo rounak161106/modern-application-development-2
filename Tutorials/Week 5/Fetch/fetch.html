@@ -9,7 +9,7 @@
     <h1>Hello World!</h1>
     <script>
         function fetchdata(){
-            fetch('http://127.0.0.1:5000/')
+            fetch('http://127.0.0.1:5000/data')
             .then((r) => {
                 // console.log(r)
                 // console.log(r.status); 
@@ -19,7 +19,7 @@
             .then((data) => console.log(data))
         }
         async function fetchdata2(){
-            let resp = await fetch("http://127.0.0.1:5000/")
+            let resp = await fetch("http://127.0.0.1:5000/data")
             let res = await resp.json()
             console.log(res)
         }
