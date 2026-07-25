@@ -8,23 +8,39 @@
 <body>
     <h1>Hello World!</h1>
     <script>
-        function fetchdata(){
-            fetch('http://127.0.0.1:5000/data')
-            .then((r) => {
-                // console.log(r)
-                // console.log(r.status); 
-                // console.log(r.json)
-                return r.json()
-            } )
-            .then((data) => console.log(data))
+        // Ṣending GET request
+        // function fetchdata(){
+        //     fetch('http://127.0.0.1:5000')
+        //     .then((r) => {
+        //         console.log(r)
+        //         // console.log(r.status); 
+        //         // console.log(r.json)
+        //         return r.json()
+        //     } )
+        //     .then((data) => console.log(data))
+        // }
+        // async function fetchdata2(){
+        //     let resp = await fetch("http://127.0.0.1:5000")
+        //     let res = await resp.json()
+        //     console.log(res)
+        // }
+        // fetchdata() 
+        // fetchdata2()
+
+        // Sending POST request
+        function send_data(data){
+            fetch('httpxx://127.0.0.1:5000/submit', {
+                method : 'POST', 
+                headers : {
+                   'Content-Type' : 'application/json'  // here instead of defining headers again and again, we can create Header object and assign value to it and reuse again and again.
+                },
+                body : JSON.stringify(data)            // we can send form data, upload files and many more. for form, header and stringify is not required as it is done by default by the browser.
+            })
+            .then(resp => resp.json())
+            .then(d => console.log("Received data successfully"))
+            .catch(e => console.log("unexpected error"))
         }
-        async function fetchdata2(){
-            let resp = await fetch("http://127.0.0.1:5000/data")
-            let res = await resp.json()
-            console.log(res)
-        }
-        fetchdata() 
-        fetchdata2()
+        send_data({"name" : "Rounak", "age" : 20})
     </script>
 </body>
 </html>
