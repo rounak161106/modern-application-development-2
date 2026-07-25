@@ -4,7 +4,8 @@ const app = new Vue({
         result : "",
         query : "",
         full_result : null,
-        current : true
+        current : true,
+        qty : "Read more"
     },
     methods : {
         fetch : async function() {
@@ -26,9 +27,11 @@ const app = new Vue({
             if(this.current){
                 this.result = this.full_result
                 this.current = false
+                this.qty = "Read Less"
             } else{
                 this.result = this.full_result.slice(0,48)
                 this.current = true
+                this.qty = "Read More"
             }
         }   
     }
