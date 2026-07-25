@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        span{
+            background:red;
+            color:white;
+            padding:4px;
+        }
+
+        .green{
+            background:green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <label for="password">Enter your Password : </label>
+        <input type="text" v-model="password"><span id="upper" :class="u_color">A</span><span id="lower" :class="l_color">a</span><span id="spcl" :class="s_color">&</span><span id="dgt" :class="d_color">0</span>
+        <p>{{ password }}</p>
+    </div>
+    <script>
+        let app = new Vue({
+            el : "#app", 
+            data : {
+                password : "",
+                l_color : "",
+                u_color : "",
+                d_color : "",
+                s_color : "",
+            }, 
+            watch : {
+                password : function(newval, oldval){
+                    console.log(newval)
+                    if(newval){
+                        this.u_color = ""
+                        this.l_color = ""
+                        this.d_color = ""
+                        this.s_color = ""   
+                        for(const char of newval){
+                            if(char !== char.toLowerCase() && char === char.toUpperCase()){
+                                this.u_color = "green"
+                            }
+                            if(char !== char.toUpperCase() && char === char.toLowerCase()){
+                                this.l_color = "green"
+                            }
+                            if (/\d/.test(char)) {
+                                this.d_color = "green"
+                            }
+                            if (/[^A-Za-z0-9\s]/.test(char)) {
+                                this.s_color = "green"
+                            }
+                        }
+                    }else{
+                        this.u_color = ""
+                        this.l_color = ""
+                        this.d_color = ""
+                        this.s_color = ""
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
