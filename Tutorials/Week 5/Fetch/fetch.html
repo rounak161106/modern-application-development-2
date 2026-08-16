@@ -29,7 +29,7 @@
 
         // Sending POST request
         function send_data(data){
-            fetch('httpxx://127.0.0.1:5000/submit', {
+            fetch('http://127.0.0.1:5000/submit', {
                 method : 'POST', 
                 headers : {
                    'Content-Type' : 'application/json'  // here instead of defining headers again and again, we can create Header object and assign value to it and reuse again and again.
