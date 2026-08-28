@@ -1,5 +1,8 @@
 # JavaScript Notes
 
+## Node js
+Node js is the environment that is used to run js in the system outside the browsers. However it uses, it uses chrome v8 engine to run js.
+
 ## Variable Declarations
 
 1. In `var` and `let` declarations, the initializer is optional. If a variable is declared without an initializer, it is assigned the value `undefined`.

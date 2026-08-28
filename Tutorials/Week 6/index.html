@@ -15,6 +15,50 @@
     <script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
 </head>
 <body>
-    
+    <div id="app">
+        <h3>{{ message }}</h3>
+        <!-- <home>This is the Home Page</home>
+        <about>This is the   About Page</about> -->
+        <router-link to="/home">Home</router-link>
+        <router-link to="/about">About</router-link>
+        <router-view></router-view> 
+    </div>
+    <script>
+        const home = {
+            template : `
+                <div>
+                    <p>Home page</p>
+                </div> 
+            `
+        }
+        const about = {
+            template : `
+                <div>
+                    <p>About page</p>
+                </div> 
+            `
+        }
+        const routes = [
+            { path : "/home", component : home },
+            { path : "/about", component : about }
+        ]
+        const router = new VueRouter({
+            routes
+        })
+        const app = new Vue({
+            el : "#app", 
+            data : {
+                message : "Hello World"
+            },
+            components : {
+                home, 
+                about
+            },
+            router, 
+            mounted(){
+                // this.$router.push("/home")  // this will redirect to home page when the page is loaded. we can also use this.$router.push("/about") to redirect to about page.
+            }
+        })
+    </script>
 </body>
 </html>
