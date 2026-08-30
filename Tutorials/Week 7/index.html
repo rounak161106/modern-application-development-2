@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Management</title> 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex@3.6.2/dist/vuex.js"></script> <!-- Vuex is a state management library for Vue.js applications. It provides a centralized store for managing the state of the application, making it easier to share data between components and manage complex state logic. -->
+</head>
+<body>
+    <div id="app">
+        <h2>Count: {{ count }}  </h2>
+        <h2>Double Count: {{ doubleCount }}  </h2>
+        <button @click="increment">Increment</button>
+        <button @click="incrementAsync">Increment Async</button>
+        <comp></comp>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
