@@ -8,12 +8,35 @@
 <body>
     <h1>Hello world</h1>
     <script>
-        async function test() {
-            return "Async function in the test function";
-        }
-        console.log("Before calling async function");
-        console.log(test().then((result) => console.log(result)));
-        console.log("After calling async function");
+        // async function test() {
+        //     return "Async function in the test function";
+        // }
+        // console.log("Before calling async function");
+        // console.log(test().then((result) => console.log(result)));
+        // console.log("After calling async function");
+
+        // async function test() {
+        //     console.log("A");
+
+        //     await fetch("/users");
+
+        //     console.log("B");
+        // }
+
+        // console.log("1");
+        // console.log(test());
+        // console.log("2");  // 1, A, Promise { <pending> }, 2, B
+
+        // Synchronous code
+        //     ↓
+        // Microtasks (Promise.then, queueMicrotask)
+        //     ↓
+        // Tasks/macrotasks (setTimeout, setInterval, etc.)
+
+        // console.log("A");
+        // setTimeout(() => console.log("B"), 0);
+        // Promise.resolve().then(() => console.log("C"));
+        // console.log("D");  // A, D, C, B
     </script>
 </body>
 </html>

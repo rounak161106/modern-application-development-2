@@ -1,15 +1,15 @@
 Vue.component("blog", {
     props : ["attr1", "attr2", "msg"],
     template : `<div>
-                <p><slot></slot></p>
-                <p>{{ message1 }}</p>
-                <p>This is second heading!</p>
-                <p>{{ compMessage }}</p>
-                <p>Attribute 1 : {{ attr1 }}</p>
-                <p>Attribute 2 : {{ attr2 }}</p>
-                <p>Msg : {{ msg }}</p>
-                <p>Count : {{ count }}</p>
-                <button @click="updatecount">Click Me</button>
+                    <p><slot></slot></p>
+                    <p>{{ message1 }}</p>
+                    <p>This is second heading!</p>
+                    <p>{{ compMessage }}</p>
+                    <p>Attribute 1 : {{ attr1 }}</p>
+                    <p>Attribute 2 : {{ attr2 }}</p>
+                    <p>Msg : {{ msg }}</p>
+                    <p>Count : {{ count }}</p>
+                    <button @click="updatecount">Click Me</button>
                 </div>`, 
     data : function(){
         return {

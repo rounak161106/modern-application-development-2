@@ -1,0 +1,2 @@
+1. In order to pass data from parent to child, we define a props in the components definition and then pass the value from child using the v bind property that we had. and then using it in the child component
+2. In order to pass data from the component to parent, we emit event, ($emit(event_name, data)) and then when the event is emitted, we catch that in the component using @ or v-on and then trigger some method in the parent.  

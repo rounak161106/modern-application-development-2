@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var x = 5;
+        {
+            console.log(x); // Output: 5
+            var x = 10;
+            console.log(x); // Output: 10
+            x = 20;
+            console.log(x); // Output: 20
+        }
+        console.log(x); // Output: 20 This is because 'var' is function-scoped, not block-scoped. The variable 'x' declared with 'var' inside the block overwrites the outer 'x'.
+
+        const obj = {
+            var1 : 10,
+            func : () => {
+                function innerFunc() {
+                    console.log(this.var1); // Output: undefined here
+                }
+                console.log(this.var1); // Output: undefined
+            }
+        }
+        obj.func(); // Output: undefined This is because arrow functions do not have their own 'this' context. Instead, they inherit 'this' from the surrounding lexical scope, which in this case is the global scope where 'var1' is not defined.
+    </script>
+</body>
+</html>

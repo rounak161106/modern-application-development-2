@@ -3,6 +3,14 @@
 ## Node js
 Node js is the environment that is used to run js in the system outside the browsers. However it uses, it uses chrome v8 engine to run js.
 
+- Js is a dynamically and weakly typed language.
+
+### data types
+number, bigint, strings, boolean, null, undefined
+
+null == undefined -> true
+null === undefined -> false
+
 ## Variable Declarations
 
 1. In `var` and `let` declarations, the initializer is optional. If a variable is declared without an initializer, it is assigned the value `undefined`.
