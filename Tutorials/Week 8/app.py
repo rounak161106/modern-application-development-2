@@ -33,7 +33,7 @@ def index():
 def login():
     username = request.json.get('username')
     password = request.json.get('password')
-    # creds = request.get_json() 
+    # creds = request.get_json()
 
     user = User.query.filter_by(username=username, password=password).first()
     if not user:
